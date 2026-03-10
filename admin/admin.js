@@ -6,7 +6,6 @@ let currentTab = 'movies';
 let allData = { movies: [], games: [], streaming: [] };
 
 document.addEventListener('DOMContentLoaded', () => {
-    const loginBtn = document.getElementById('login-btn');
     const logoutBtn = document.getElementById('logout-btn');
     const itemForm = document.getElementById('item-form');
 
@@ -15,10 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     showDashboard(); // open dashboard automatically
 
 });
-
-    loginBtn.onclick = () => {
-    showDashboard();
-};
 
     logoutBtn.onclick = () => {
         sessionStorage.removeItem('adminLoggedIn');
