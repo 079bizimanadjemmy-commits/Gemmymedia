@@ -1,6 +1,6 @@
 // Admin Credentials (not used anymore)
 const SUPABASE_URL = "https://hkhohtztjvcfnnvoctee.supabase.co";
-const ADMIN_PASS = "gemmy2026";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhraG9odHp0anZjZm5udm9jdGVlIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxNDA3MTQsImV4cCI6MjA4ODcxNjcxNH0.AkPA9rugab_849MUzyiqd5jFfRsXi91rvbyx7hH0xCc";
 
 let currentTab = 'movies';
 let allData = { movies: [], games: [], streaming: [] };
