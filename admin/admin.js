@@ -26,11 +26,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 });
 
-async function showDashboard() {
-    document.getElementById('login-section').style.display = 'none';
-    document.getElementById('dashboard-section').style.display = 'block';
-    await loadData();
-}
 
 async function loadData() {
     try {
