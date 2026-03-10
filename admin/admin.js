@@ -17,16 +17,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
     loginBtn.onclick = () => {
-        const user = document.getElementById('username').value;
-        const pass = document.getElementById('password').value;
-
-        if (user === ADMIN_USER && pass === ADMIN_PASS) {
-            sessionStorage.setItem('adminLoggedIn', 'true');
-            showDashboard();
-        } else {
-            document.getElementById('login-error').style.display = 'block';
-        }
-    };
+    showDashboard();
+};
 
     logoutBtn.onclick = () => {
         sessionStorage.removeItem('adminLoggedIn');
