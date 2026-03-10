@@ -1,5 +1,5 @@
 // Admin Credentials (not used anymore)
-const ADMIN_USER = "admin";
+const SUPABASE_URL = "https://hkhohtztjvcfnnvoctee.supabase.co";
 const ADMIN_PASS = "gemmy2026";
 
 let currentTab = 'movies';
