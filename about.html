@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GemmyMedia - About</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="scrolled">
+        <a href="index.html" class="logo">GEMMY<span>MEDIA</span></a>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="movies.html">Movies</a>
+            <a href="games.html">Games</a>
+        </div>
+    </nav>
+
+    <div style="padding: 100px 4% 4rem; max-width: 800px; margin: 0 auto; text-align: center;">
+        <h1 style="font-size: 3rem; margin-bottom: 2rem;">About Agasobanuye Times</h1>
+        <p style="font-size: 1.2rem; line-height: 1.6; color: var(--text-secondary);">
+            GemmyMedia (Agasobanuye Times) is Rwanda's premier digital marketplace for narrated films and top-tier games. We specialize in bringing the unique Agasobanuye experience to your devices.
+        </p>
+    </div>
+
+    <section style="padding: 0 4% 4rem; text-align: center;">
+        <h2 style="font-size: 1.5rem; margin-bottom: 2rem; color: var(--text-secondary);">Visual Concept Preview</h2>
+        <div id="concept-image-container" style="max-width: 800px; margin: 0 auto; min-height: 400px; background: var(--card-bg); border-radius: 16px; display: flex; align-items: center; justify-content: center; border: 2px dashed rgba(255,255,255,0.1); overflow: hidden;">
+            <p id="loading-text">Generating visual concept of Agasobanuye Times...</p>
+        </div>
+    </section>
+
+    <script type="module">
+        import { GoogleGenAI } from "@google/genai";
+        const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
+        
+        async function generatePreview() {
+            const container = document.getElementById('concept-image-container');
+            try {
+                const response = await ai.models.generateContent({
+                    model: 'gemini-3.1-flash-image-preview',
+                    contents: {
+                        parts: [{ text: 'A professional website UI design for "Agasobanuye Times", a Rwandan movie store. Dark theme, vibrant red accents, movie grid with "VJ Junior" labels, Mobile Money payment icons, clean and modern.' }],
+                    },
+                    config: { imageConfig: { aspectRatio: "16:9", imageSize: "1K" } }
+                });
+
+                for (const part of response.candidates[0].content.parts) {
+                    if (part.inlineData) {
+                        const img = document.createElement('img');
+                        img.src = `data:image/png;base64,${part.inlineData.data}`;
+                        img.style.width = '100%';
+                        img.style.display = 'block';
+                        img.referrerPolicy = 'no-referrer';
+                        container.innerHTML = '';
+                        container.appendChild(img);
+                        container.style.border = 'none';
+                    }
+                }
+            } catch (e) {
+                console.error(e);
+                container.innerHTML = '<p style="color: #ef4444;">Failed to load visual concept. Please refresh.</p>';
+            }
+        }
+        generatePreview();
+    </script>
+
+    <footer>
+        <p>&copy; 2026 GemmyMedia. All rights reserved.</p>
+    </footer>
+
+    <!-- AI Assistant -->
+    <div id="ai-chat-container">
+        <div id="ai-chat-box">
+            <div class="chat-header">Gemmy Assistant</div>
+            <div id="ai-messages" class="chat-messages">
+                <div class="message message-ai">Hi! Want to know more about us? Or looking for a recommendation?</div>
+            </div>
+            <div class="chat-input-area">
+                <input type="text" id="ai-input" placeholder="Ask me anything...">
+                <button id="ai-send" class="btn btn-primary" style="padding: 0.5rem 1rem;">Send</button>
+            </div>
+        </div>
+        <div id="ai-chat-toggle">AI</div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script type="module" src="js/ai-assistant.js"></script>
+</body>
+</html>

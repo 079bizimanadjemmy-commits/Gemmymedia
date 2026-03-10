@@ -1,0 +1,35 @@
+[
+  {
+    "id": 101,
+    "title": "The Last Guardian",
+    "vj": "VJ Junior",
+    "type": "Streaming",
+    "description": "A warrior protects the last of his kind in a world overrun by darkness.",
+    "poster": "https://picsum.photos/seed/stream1/400/600",
+    "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+    "category": "Action",
+    "trending": true
+  },
+  {
+    "id": 102,
+    "title": "Urban Legends",
+    "vj": "VJ Jingo",
+    "type": "Streaming",
+    "description": "The hidden stories of the city come to life in this thrilling mystery.",
+    "poster": "https://picsum.photos/seed/stream2/400/600",
+    "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+    "category": "Mystery",
+    "trending": true
+  },
+  {
+    "id": 103,
+    "title": "Desert Storm",
+    "vj": "VJ Emmy",
+    "type": "Streaming",
+    "description": "Survival is the only goal in the harshest environment on Earth.",
+    "poster": "https://picsum.photos/seed/stream3/400/600",
+    "video": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+    "category": "Adventure",
+    "trending": false
+  }
+]

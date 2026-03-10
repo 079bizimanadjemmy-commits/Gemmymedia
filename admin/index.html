@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GemmyMedia - Admin Dashboard</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { background: #0a0a0a; color: white; }
+        .admin-login-container {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .login-card {
+            background: #111;
+            padding: 2.5rem;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 400px;
+            border: 1px solid #222;
+        }
+        .dashboard-container {
+            display: none;
+            padding: 2rem 4%;
+        }
+        .admin-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #222;
+        }
+        .tab-btns { display: flex; gap: 1rem; margin-bottom: 2rem; }
+        .tab-btn {
+            background: #111;
+            border: 1px solid #333;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .tab-btn.active { background: var(--accent); border-color: var(--accent); }
+        .item-list {
+            display: grid;
+            gap: 1rem;
+        }
+        .admin-item {
+            background: #111;
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #222;
+        }
+        .item-info h4 { margin: 0; }
+        .item-info p { margin: 0.2rem 0 0; font-size: 0.8rem; color: #888; }
+        .admin-actions { display: flex; gap: 0.5rem; }
+        
+        /* Modal for adding/editing */
+        .admin-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+        .admin-modal-content {
+            background: #111;
+            padding: 2rem;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Section -->
+    <div id="login-section" class="admin-login-container">
+        <div class="login-card">
+            <h2 style="margin-bottom: 1.5rem; text-align: center;">Admin Login</h2>
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="username" placeholder="Enter username">
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="Enter password">
+            </div>
+            <button id="login-btn" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Login</button>
+            <p id="login-error" style="color: #ff4444; margin-top: 1rem; text-align: center; display: none;">Invalid credentials</p>
+        </div>
+    </div>
+
+    <!-- Dashboard Section -->
+    <div id="dashboard-section" class="dashboard-container">
+        <nav class="admin-nav">
+            <h2 class="logo">GEMMY<span>ADMIN</span></h2>
+            <button id="logout-btn" class="btn btn-outline">Logout</button>
+        </nav>
+
+        <div class="tab-btns">
+            <button class="tab-btn active" onclick="switchTab('movies')">Movies</button>
+            <button class="tab-btn" onclick="switchTab('streaming')">Streaming</button>
+            <button class="tab-btn" onclick="switchTab('games')">Games</button>
+        </div>
+
+        <div id="movies-tab">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h3>Manage Movies</h3>
+                <button class="btn btn-primary" onclick="openItemModal('movies')">+ Add Movie</button>
+            </div>
+            <div id="movies-list" class="item-list"></div>
+        </div>
+
+        <div id="streaming-tab" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h3>Manage Streaming Films</h3>
+                <button class="btn btn-primary" onclick="openItemModal('streaming')">+ Add Film</button>
+            </div>
+            <div id="streaming-list" class="item-list"></div>
+        </div>
+
+        <div id="games-tab" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <h3>Manage Games</h3>
+                <button class="btn btn-primary" onclick="openItemModal('games')">+ Add Game</button>
+            </div>
+            <div id="games-list" class="item-list"></div>
+        </div>
+    </div>
+
+    <!-- Add/Edit Modal -->
+    <div id="item-modal" class="admin-modal">
+        <div class="admin-modal-content">
+            <h3 id="modal-title">Add New Item</h3>
+            <form id="item-form">
+                <input type="hidden" id="item-id">
+                <input type="hidden" id="item-type">
+                <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" id="item-title" required>
+                </div>
+                <div class="form-group">
+                    <label>VJ / Publisher</label>
+                    <input type="text" id="item-vj" required>
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea id="item-desc" rows="3" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Poster URL</label>
+                    <input type="text" id="item-poster" required>
+                </div>
+                <div class="form-group">
+                    <label>Download URL</label>
+                    <input type="text" id="item-download" required>
+                </div>
+                <div id="movie-fields">
+                    <div class="form-group">
+                        <label>Category</label>
+                        <select id="item-category">
+                            <option value="agasobanuye">Agasobanuye</option>
+                            <option value="action">Action</option>
+                            <option value="India">India</option>
+                            <option value="Series">Series</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+                    <button type="submit" class="btn btn-primary" style="flex: 1;">Save Changes</button>
+                    <button type="button" class="btn btn-outline" onclick="closeItemModal()" style="flex: 1;">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

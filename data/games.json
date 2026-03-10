@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "title": "Cyber Strike",
+    "description": "High-octane action in a digital world.",
+    "cover": "https://picsum.photos/seed/game1/400/600",
+    "download": "https://example.com/download/cyber-strike",
+    "price": 2000,
+    "category": "action"
+  },
+  {
+    "id": 2,
+    "title": "Mystic Quest",
+    "description": "Uncover ancient secrets in this fantasy RPG.",
+    "cover": "https://picsum.photos/seed/game2/400/600",
+    "download": "https://example.com/download/mystic-quest",
+    "price": 5000,
+    "category": "rpg"
+  },
+  {
+    "id": 3,
+    "title": "Speed Racer X",
+    "description": "The ultimate racing experience with realistic physics.",
+    "cover": "https://picsum.photos/seed/game3/400/600",
+    "download": "https://example.com/download/speed-racer-x",
+    "price": 1500,
+    "category": "sports"
+  },
+  {
+    "id": 4,
+    "title": "Island Survival",
+    "description": "Survive on a deserted island.",
+    "cover": "https://picsum.photos/seed/game4/400/600",
+    "download": "https://example.com/download/island-survival",
+    "price": 1000,
+    "category": "adventure"
+  }
+]
