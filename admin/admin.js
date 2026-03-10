@@ -10,10 +10,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const logoutBtn = document.getElementById('logout-btn');
     const itemForm = document.getElementById('item-form');
 
-    // Check session
-    if (sessionStorage.getItem('adminLoggedIn')) {
-        showDashboard();
-    }
+    document.addEventListener('DOMContentLoaded', () => {
+
+    showDashboard(); // open dashboard automatically
+
+});
 
     loginBtn.onclick = () => {
         const user = document.getElementById('username').value;
