@@ -1,4 +1,4 @@
-// Admin Credentials
+// Admin Credentials (not used anymore)
 const ADMIN_USER = "admin";
 const ADMIN_PASS = "gemmy2026";
 
@@ -6,26 +6,22 @@ let currentTab = 'movies';
 let allData = { movies: [], games: [], streaming: [] };
 
 document.addEventListener('DOMContentLoaded', () => {
-    const logoutBtn = document.getElementById('logout-btn');
-    const itemForm = document.getElementById('item-form');
-
-    document.addEventListener('DOMContentLoaded', () => {
 
     showDashboard(); // open dashboard automatically
 
-});
+    const logoutBtn = document.getElementById('logout-btn');
+    const itemForm = document.getElementById('item-form');
 
     logoutBtn.onclick = () => {
-        sessionStorage.removeItem('adminLoggedIn');
-        location.reload();
+        location.reload(); // just reload, no session
     };
 
     itemForm.onsubmit = async (e) => {
         e.preventDefault();
         await saveItem();
     };
-});
 
+});
 
 async function loadData() {
     try {
